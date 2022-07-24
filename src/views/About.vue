@@ -60,7 +60,7 @@
 export default {
   name: "About",
   data:()=>({
-    mamoru_img:require('/Users/mamoru/webアプリケーション/HoseiNavi/hosei/src/assets/tanimoto.jpeg')
+    mamoru_img:require('@/assets/tanimoto.jpeg')
   })
 
 }
