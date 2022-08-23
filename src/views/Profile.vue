@@ -1,12 +1,15 @@
 <template>
-  <div class="profile pa-10 justfity-center">
+  <div class="profile px-5 justfity-center">
     <h1>管理画面</h1>
     <div v-if="is_registed">
-      サークル情報を編集する
-      <h3>サークル：{{ user }}</h3>
+      <h3>サークルアドレス：{{ user }}</h3>
     </div>
     <div v-else>サークル情報を新規登録する</div>
-    <img id="image" width="50%" height="50%" />
+    <v-row>
+      <v-col cols="12" sm="4">
+        <img id="image" width="50%" height="50%"/>
+      </v-col>  
+    <v-col cols="12" sm="6">
     <v-form ref="form" v-model="valid" lazy-validation>
       <v-text-field
         v-model="username"
@@ -94,10 +97,13 @@
       <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate">
         Validate
       </v-btn>
-
       <v-btn color="error" class="mr-4" @click="submit"> 登録 </v-btn>
     </v-form>
-  </div>
+      </v-col>
+    <v-col cols="12" sm="2"></v-col>
+    </v-row>
+    </div>
+
 </template>
 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -224,7 +230,7 @@ export default {
     img.setAttribute('src', url);
   })
   .catch((error) => {
-    // Handle any errors
+    console.log(error)
   })
   },
   methods: {
@@ -274,13 +280,6 @@ export default {
       uploadBytes(storageRef, this.profile_file).then((snapshot) => {
         console.log("Uploaded file:", this.profile_name);
       });
-      //活動写真
-      // this.content_files.forEach(function(element){
-      //     uploadBytes(storageRef,element).then((snapshot) => {
-      //       console.log('Uploaded file:',element)
-      // });
-      // })
-      // this.reset()
     },
     reset(){
       this.$router.push("/")
