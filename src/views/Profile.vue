@@ -1,23 +1,20 @@
 <template>
-  <div class="profile px-5 justfity-center">
-    <h1>管理画面</h1>
-    <div v-if="is_registed">
-      <h3>サークルアドレス：{{ user }}</h3>
-    </div>
-    <div v-else>サークル情報を新規登録する</div>
-    <v-row>
-      <v-col cols="12" sm="4">
-        <img id="image" width="50%" height="50%"/>
-      </v-col>  
-    <v-col cols="12" sm="6">
-    <v-form ref="form" v-model="valid" lazy-validation>
-      <v-text-field
-        v-model="username"
-        :counter="10"
-        :rules="nameRules"
-        label="サークル名"
-        required
-      ></v-text-field>
+    <v-container>
+    <v-card class="align-center">
+      <v-card-title class="blue lighten-3 white--text">      
+          <div v-if="is_registed">
+            <h3>{{ username }}さん</h3>
+          </div>
+          <div v-else>サークル情報を新規登録する</div>
+        </v-card-title>
+        <v-card-text>
+          <v-form ref="form" v-model="valid" lazy-validation>
+            <!-- プロフィール画像表示 -->
+        
+      <div class="img">
+        <img id="image"/>
+      </div>
+        
       <!-- プロフィール画像 -->
       <v-file-input
         chips
@@ -50,7 +47,7 @@
       <v-textarea v-model="event" color="teal" label="イベント"> </v-textarea>
       <!-- 活動場所 -->
       <v-text-field v-model="place" label="活動場所" required></v-text-field>
-        <v-select
+      <v-select
         v-model="campas"
         :items="campases"
         :rules="[(v) => !!v || 'Item is required']"
@@ -59,7 +56,7 @@
       ></v-select>
 
       <!-- 活動費用 -->
-        <v-text-field
+      <v-text-field
         v-model="money"
         label="活動費用(年間)"
         required
@@ -77,7 +74,10 @@
       <v-text-field v-model="member" label="所属人数" required></v-text-field>
 
       <!-- twitter -->
-      <v-text-field label="Twitter" v-model="twitter" prepend-icon="mdi-twitter"
+      <v-text-field
+        label="Twitter"
+        v-model="twitter"
+        prepend-icon="mdi-twitter"
       ></v-text-field>
 
       <!-- instagram -->
@@ -98,20 +98,23 @@
         Validate
       </v-btn>
       <v-btn color="error" class="mr-4" @click="submit"> 登録 </v-btn>
-    </v-form>
-      </v-col>
-    <v-col cols="12" sm="2"></v-col>
-    </v-row>
-    </div>
-
+        </v-form>
+      </v-card-text>
+    </v-card>
+  </v-container>
 </template>
 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-<!-- アイコン -->
 <script>
 import { getApp } from "firebase/app";
-import { getStorage, ref, uploadBytes, getBlob,getDownloadURL } from "firebase/storage";
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  getBlob,
+  getDownloadURL,
+} from "firebase/storage";
 import {
   getFirestore,
   setDoc,
@@ -138,16 +141,16 @@ export default {
     profile_name: "",
     content_files: [],
     content: "",
-    event:"",
-    member:"",
+    event: "",
+    member: "",
     often: "",
-    money:"円",
+    money: "円",
     place: "",
     category: "",
-    campas:"",
+    campas: "",
     twitter: "https://twitter.com/",
-    instagram:"",
-    home_page:"",
+    instagram: "",
+    home_page: "",
     nameRules: [
       (v) => !!v || "Name is required",
       (v) => (v && v.length <= 10) || "Name must be less than 10 characters",
@@ -157,10 +160,20 @@ export default {
       (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
     ],
     select: null,
-    categorys: ["体育会","第二体育会","工体連","スポーツ(球技)",
-    "スポーツ(球技以外)","音楽", "文化系","国際(言語)","趣味","ボランティア"],
+    categorys: [
+      "体育会",
+      "第二体育会",
+      "工体連",
+      "スポーツ(球技)",
+      "スポーツ(球技以外)",
+      "音楽",
+      "文化系",
+      "国際(言語)",
+      "趣味",
+      "ボランティア",
+    ],
     oftens: ["週1回", "週2回", "週3回", "週4回", "週5回"],
-    campases:['市ヶ谷','小金井','多摩'],
+    campases: ["市ヶ谷", "小金井", "多摩"],
     // user :this.user,
     checkbox: false,
   }),
@@ -194,44 +207,46 @@ export default {
     this.home_page = Profile.data().home_page;
 
     // twitterが登録されていないのに、text-fieldではhttps://twitter.com/が入力されている謎
-    if(!Profile.data.twitter){
+    if (!Profile.data.twitter) {
       this.twitter = "https://twitter.com/";
-    }else{
+    } else {
       this.twitter = Profile.data().twitter;
     }
 
     // 費用
-    if(!Profile.data.money){
+    if (!Profile.data.money) {
       this.money = "円";
-    }else{
+    } else {
       this.money = Profile.data().money;
     }
-
 
     // FireStorage 画像取得
     const storage = getStorage(app);
     const file_path = this.user + "/" + this.profile_name;
+
+    console.log("ファイルpath",file_path)
     // const imageRef = ref(storage, file_path);
-    getDownloadURL(ref(storage,file_path))
-  .then((url) => {
-    // `url` is the download URL for 'images/stars.jpg'
+    getDownloadURL(ref(storage, file_path))
+      .then((url) => {
+        // `url` is the download URL for 'images/stars.jpg'
 
-    // This can be downloaded directly:
-    const xhr = new XMLHttpRequest();
-    xhr.responseType = 'blob';
-    xhr.onload = (event) => {
-      const blob = xhr.response;
-    };
-    xhr.open('GET', url);
-    xhr.send();
+        // This can be downloaded directly:
+        const xhr = new XMLHttpRequest();
+        xhr.responseType = "blob";
+        xhr.onload = (event) => {
+          const blob = xhr.response;
+        };
+        xhr.open("GET", url);
+        xhr.send();
 
-    // Or inserted into an <img> element
-    const img = document.getElementById('image');
-    img.setAttribute('src', url);
-  })
-  .catch((error) => {
-    console.log(error)
-  })
+        // Or inserted into an <img> element
+        const img = document.getElementById("image");
+        img.setAttribute("src", url);
+      })
+      .catch((error) => {
+        console.log("キャッチエラー")
+        console.log(error);
+      });
   },
   methods: {
     validate() {
@@ -242,6 +257,7 @@ export default {
     },
     //登録
     async submit() {
+      console.log("提出")
       const app = getApp();
       const db = getFirestore(app);
       // 新規登録の場合idはuserdata数
@@ -259,16 +275,16 @@ export default {
         content: this.content,
         event: this.event,
         often: this.often,
-        money:this.money,
+        money: this.money,
         place: this.place,
         category: this.category,
-        member:this.member,
+        member: this.member,
         campas: this.campas,
         profile_name: this.profile_name,
         content_files: this.content_files,
         twitter: this.twitter,
-        instagram:this.instagram,
-        home_page:this.home_page,
+        instagram: this.instagram,
+        home_page: this.home_page,
       });
       console.log("書き込み成功:", this.user);
       // 画像のアップロード
@@ -281,9 +297,39 @@ export default {
         console.log("Uploaded file:", this.profile_name);
       });
     },
-    reset(){
-      this.$router.push("/")
-    }
+    reset() {
+      this.$router.push("/");
+    },
   },
 };
 </script>
+
+<style>
+/* カードを中央に配置するためのスタイル */
+.v-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* カードの幅を設定するためのスタイル */
+.v-card {
+  width: 600px;
+  margin: 0 auto;
+}
+
+.img {
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  text-align: center;
+}
+
+/* イメージスタイル */
+#image{
+  width:50%;
+  height:50%;
+  margin: 10px auto;
+}
+</style>
