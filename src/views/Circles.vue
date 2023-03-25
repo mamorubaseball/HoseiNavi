@@ -1,26 +1,31 @@
 <template>
-<div id="circles">
+  <v-container>
+    <div id="circles">
 <!-- ネスト -->
 <div v-for="(campases,name ) in circles" :key="name">
 
-<div v-if="name == '市ヶ谷'" class="">
+<div v-if="name == '市ヶ谷'" class="ma-10">
 <div class="pa-5">
-  <h2>{{ name }}</h2>
+  <h2>{{ name }}キャンパス</h2>
 </div>
 <v-row>
   <v-col
   v-for="(circle,category) in campases"
   :key="category"
    cols="12"
-   sm="4"
-   align="center">
-    <v-card 
-         height="240"
-         width="240" 
-      :to="'circle/'+name+'/'+category">
-      <!-- <img src="@/assets/circle_category/baseball.jpeg" height="100" class="pa-2" > -->
-      <img :src = "circle.img" height="100" width="120" class="pa-2" >
-      <p class="pa-5">{{ category }}</p>
+   sm="6"
+        md="4"
+        lg="3"
+        >
+        <v-card
+        
+        class="box"  
+      :to="'circle/'+name+'/'+category"
+      >
+      <v-img :src='circle.img' height="100"></v-img>
+      
+      <v-card-subtitle>{{ category }}</v-card-subtitle>
+      <v-card-text>{{ circle["message"] }}</v-card-text>
     </v-card>
   </v-col>
 </v-row>
@@ -29,21 +34,24 @@
 
 <div v-if="name == '小金井'" class="ma-10">
 <div class="pa-5">
-  <h2>{{ name }}</h2>
+  <h2>{{ name }}キャンパス</h2>
 </div>
 <v-row>
   <v-col
   v-for="(circle,category) in campases"
   :key="category"
    cols="12"
-   sm="4"
-   align="center">
-    <v-card 
-         height="240"
-         width="240" 
+   sm="6"
+        md="4"
+        lg="3"
+   >
+    <v-card
+    class="box"
       :to="'circle/'+name+'/'+category">
-      <img :src=circle.img height="100" width="120" class="pa-2">
-      <p class="pa-5">{{ category }}</p>
+      <!-- <v-img :src='circle.img' height="100" width="120" class="pa-2"></v-img> -->
+      <v-img :src='circle.img' height="100"></v-img>
+      <v-card-subtitle>{{ category }}</v-card-subtitle>
+      <v-card-text>{{ circle["message"] }}</v-card-text>
     </v-card>
   </v-col>
 </v-row>
@@ -51,21 +59,24 @@
 
 <div v-if="name == '多摩'" class="ma-10">
 <div class="pa-5">
-  <h2>{{ name }}</h2>
+  <h2>{{ name }}キャンパス</h2>
 </div>
 <v-row>
   <v-col
   v-for="(circle,category) in campases"
   :key="category"
    cols="12"
-   sm="4"
+   sm="6"
+        md="4"
+        lg="3"
    align="center">
     <v-card
-          height="240"
-         width="240" 
+
       :to="'circle/'+name+'/'+category">
-      <img :src='circle.img' height="100" width="120" class="pa-2">
-      <p>{{ category }}</p>
+      <!-- <v-img :src='circle.img' height="100" width="120" class="pa-2"></v-img> -->
+      <v-img :src='circle.img' height="100"></v-img>
+      <v-card-subtitle>{{ category }}</v-card-subtitle>
+      <v-card-text>{{ circle["message"] }}</v-card-text>
       <!-- <p>{{ circle['message'] }}</p> -->
     </v-card>
   </v-col>
@@ -73,7 +84,7 @@
 </div>
 </div>
 </div>
-
+  </v-container>
 </template>
 <script>
 export default {
@@ -128,12 +139,23 @@ export default {
 </script>
 
 <style>
-#card-wrapper {
+/* #card-wrapper {
     display: grid;
     justify-content: center;
     grid-template-columns: repeat(auto-fill, 270px);
     padding: 0 0 100px;
     margin: 0 auto;
+} */
+.box{
+  border-radius: 100px;
+    /* 初期状態のスタイル */
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.box:hover {
+  /* マウスを乗せた時のスタイル */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 #circles{
     font-family: "Avenir", Helvetica, Arial, sans-serif;
