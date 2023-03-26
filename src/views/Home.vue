@@ -32,6 +32,8 @@
 <script>
 import blogs from "../components/Blogs.vue";
 import circles from "../components/Circles.vue";
+import { mapState } from 'vuex'
+
 
 export default {
   name: 'Home',
@@ -48,6 +50,16 @@ export default {
   components: {
    blogs,
    circles
+  },
+  mounted() {
+    if (this.isLoggedIn) {
+      console.log('User is logged in')
+    } else {
+      console.log('User is not logged in')
+    }
+  },
+  computed: {
+    ...mapState(['isLoggedIn', 'user'])
   },
   methods: {
 
