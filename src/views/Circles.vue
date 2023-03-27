@@ -57,7 +57,7 @@
 </v-row>
 </div>
 
-<div v-if="name == '多摩'" class="ma-10">
+<!-- <div v-if="name == '多摩'" class="ma-10">
 <div class="pa-5">
   <h2>{{ name }}キャンパス</h2>
 </div>
@@ -73,15 +73,15 @@
     <v-card
 
       :to="'circle/'+name+'/'+category">
-      <!-- <v-img :src='circle.img' height="100" width="120" class="pa-2"></v-img> -->
+      <v-img :src='circle.img' height="100" width="120" class="pa-2"></v-img>
       <v-img :src='circle.img' height="100"></v-img>
       <v-card-subtitle>{{ category }}</v-card-subtitle>
       <v-card-text>{{ circle["message"] }}</v-card-text>
-      <!-- <p>{{ circle['message'] }}</p> -->
+      <p>{{ circle['message'] }}</p>
     </v-card>
   </v-col>
 </v-row>
-</div>
+</div> -->
 </div>
 </div>
   </v-container>
@@ -139,13 +139,13 @@ export default {
 </script>
 
 <style>
-/* #card-wrapper {
+#card-wrapper {
     display: grid;
     justify-content: center;
     grid-template-columns: repeat(auto-fill, 270px);
     padding: 0 0 100px;
     margin: 0 auto;
-} */
+}
 .box{
   border-radius: 100px;
     /* 初期状態のスタイル */

@@ -1,93 +1,98 @@
 <template>
-  <div id="blogs" class="ml-10">
-    <ul class="cards">
-          <li v-for="(post,index) in posts" :key="post.slug + '_' + index" class="csscard box">
-        <div class = "">
-          <img
-      v-if="post.featured_image"
-      :src="post.featured_image"
-      alt=""
-      height="120" width="150"
+    <div class="pa-10">
+    <v-form
+      @submit.prevent="search"
     >
-    <img
-      v-else
-      src="http://via.placeholder.com/250x250"
-      alt=""
-    >          
-        <h3 class="csscard-title">{{ post["title"] }}</h3>
+      <v-text-field
+        v-model="searchKeyword"
+        dense
+        hide-details
+        rounded
+        clearable
+        placeholder="サークルを検索"
+        :solo="isFocused"
+        :filled="!isFocused"
+        :style="{ minWidth: '180px' }"
+        @focus="focus"
+        @blur="blur"
+      />
+      <v-btn type="submit">検索</v-btn>
+    </v-form>
+      <ul class="cards">
+          <li v-for="(circle,index) in circles" :key="index" class="csscard box">
+        <div>
+          <img :src="circle.src"  height="120" width="150"/>
+        <h3 class="csscard-title">{{ circle["username"] }}</h3>
         <div class="csscard-content">
-          <p>{{ post["summary"] }}</p>
+          <p>テキスト</p>
         </div>
       </div>
-      <!-- <div class="csscard-link-wrapper">
-        <a href="" class="csscard-link">Learn More</a>
-      </div> -->
     </li>
-
-        </ul>
-
-      <!-- `v-for` の生成、および Vue 用に `key` 属性の適用。ここでは、slug と index の組みを使用します -->
-  <!-- <v-row class="pa-10">
-  <v-col
-    v-for="(post,index) in posts"
-        :key="post.slug + '_' + index"
-   cols="12"
-   sm="4"
-   align="center"
-   >
-    <v-card 
-   
-         height="240"
-         width="240" 
-      :to="'blogs/'+post.slug">
-      <article class="media">
-        <img
-      v-if="post.featured_image"
-      :src="post.featured_image"
-      alt=""
-      width="100"
-      height="100"
-    >
-    <img
-      v-else
-      src="http://via.placeholder.com/250x250"
-      alt=""
-    >          
-      <h2>{{ post.title }}</h2>
-      <p>{{ post.summary }}</p>
-      <p>カテゴリー:{{ post.categories[0].name}}</p>
-      </article>
-    </v-card>
-  </v-col>
-</v-row> -->
-  </div>
+    </ul>
+    </div>
 </template>
- <script>
-import butter from '../buttercms';
- export default {
-  name: 'blogs',
-  data() {
-    return {
-      page_title: '記事一覧',
-      posts: [],
-    };
+
+<script>
+import { getApp } from "firebase/app";
+import { getStorage,ref, getBlob } from "firebase/storage";
+import {
+  getFirestore,
+  collection,
+  query,
+  where,
+  getDocs,
+} from "firebase/firestore";
+
+export default {
+  name: 'search',
+  data:()=>({
+    searchKeyword:'',
+    searchResult: [],
+    circles:[],
+  }),
+  mounted() {
   },
   methods: {
-    getPosts() {
-      butter.post.list({
-        page: 1,
-        page_size: 10,
-      }).then((res) => {
-        this.posts = res.data.data;
-      });
-    },
+    search(){
+      // 検索結果をリセット
+      this.circles = [];
+    console.log("検索開始")
+    // initialize
+    const app = getApp();
+    // get user list
+    let db = getFirestore(app);
+    const storage = getStorage(app);
+    const Users = collection(db,"users");
+
+    getDocs(query(Users,where("username",">=",this.searchKeyword),where("username","<=",this.searchKeyword +'\uf8ff')))
+      .then(snapshot =>{
+      snapshot.forEach(doc=>{
+        console.log("検索結果",doc.id)
+        const circle_data = doc.data()
+        const url =  circle_data.category+'/'+doc.id;
+        circle_data['email'] = doc.id
+        circle_data['to'] = url;
+        // 画像srcの取得
+        const file_path = doc.id + "/" +circle_data.profile_name
+        const imageRef = ref(storage, file_path);
+        getBlob(imageRef)
+        .then((blob) => {
+            const blobURL = URL.createObjectURL(blob);
+            circle_data['src'] = blobURL
+        })
+        .catch((e) => {
+            console.log(e)})
+        //配列に格納する
+        this.circles.push(circle_data)
+
+      })
+    })
+    }
   },
-  created() {
-    this.getPosts();
-  },
-};
+}
 </script>
- <style scoped>
+
+<style scoped>
 .box{
   border-radius: 100px;
     /* 初期状態のスタイル */
@@ -140,7 +145,8 @@ h2 {
   
   list-style: none;
   overflow-x: scroll;
-  overflow-y: hidden;
+  /* 追加 */
+  overflow-y: hidden; 
 
   scroll-snap-type: x mandatory;
 }
@@ -148,6 +154,7 @@ h2 {
 .csscard {
   display: flex;
   flex-direction: column;
+  /* 追加（flex-direction: column;によってカードの高さが自動で決まるらしい) */
   height: 250px;
   padding: 20px 0px;
   flex: 0 0 100%;
@@ -159,6 +166,7 @@ h2 {
   transition: all 0.2s;
 }
 
+/* 追加、画像をcsscsrdクラス目一杯貼り付ける */
 .csscard img {
   width: 100%;
   height: 50%;
@@ -269,6 +277,4 @@ h2 {
 
 
 
-
 </style>
-
