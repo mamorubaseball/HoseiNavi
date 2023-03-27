@@ -292,7 +292,8 @@ h2 {
   
   list-style: none;
   overflow-x: scroll;
-  overflow-y: hidden;
+  /* 追加 */
+  overflow-y: hidden; 
 
   scroll-snap-type: x mandatory;
 }
@@ -300,6 +301,7 @@ h2 {
 .csscard {
   display: flex;
   flex-direction: column;
+  /* 追加（flex-direction: column;によってカードの高さが自動で決まるらしい) */
   height: 250px;
   padding: 20px 0px;
   flex: 0 0 100%;
@@ -311,6 +313,7 @@ h2 {
   transition: all 0.2s;
 }
 
+/* 追加、画像をcsscsrdクラス目一杯貼り付ける */
 .csscard img {
   width: 100%;
   height: 50%;
