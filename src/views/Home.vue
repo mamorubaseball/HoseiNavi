@@ -19,11 +19,10 @@
       />
     </v-form>
     </div>
-    <div class="pb-5">
-<h1>人気記事</h1>
+    <div class="pb-1">
+<h2>記事</h2>
     <blogs></blogs>
 </div>
-<h1>サークル一覧</h1>
 <circles></circles>
 </div>
 

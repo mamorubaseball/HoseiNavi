@@ -8,9 +8,9 @@
         <div v-else>サークル情報を新規登録する</div>
       </v-card-title>
       <v-card-text>
-        <v-form ref="form" v-model="valid" lazy-validation>
+ 
+          <v-form ref="form" @submit.prevent="submit">
           <!-- プロフィール画像表示 -->
-
           <div class="img">
             <img id="image" />
           </div>
@@ -22,12 +22,21 @@
             v-model="profile_file"
           ></v-file-input>
 
+          <!-- サークル名 -->
+          <v-text-field
+        v-model="username"
+        :counter="10"
+        :rules="nameRules"
+        label="サークル名"
+        required
+      ></v-text-field>
+
           <!-- 活動内容写真 -->
           <v-file-input
             small-chips
             multiple
             counter
-            :rules="rules"
+
             label="活動様子がわかる写真を1~3枚入力してください"
             v-model="content_files"
           ></v-file-input>
@@ -39,7 +48,7 @@
           <v-select
             v-model="often"
             :items="oftens"
-            :rules="[(v) => !!v || 'Item is required']"
+   
             label="活動頻度"
             required
           ></v-select>
@@ -56,7 +65,7 @@
           <v-select
             v-model="campas"
             :items="campases"
-            :rules="[(v) => !!v || 'Item is required']"
+            :rules="rules"
             label="キャンパス"
             required
           ></v-select>
@@ -65,13 +74,13 @@
           <v-text-field
             v-model="money"
             label="活動費用(年間)"
-            required
+    
           ></v-text-field>
 
           <v-select
             v-model="category"
             :items="categorys"
-            :rules="[(v) => !!v || 'Item is required']"
+            :rules="rules"
             label="カテゴリー"
             required
           ></v-select>
@@ -80,7 +89,7 @@
           <v-text-field
             v-model="member"
             label="所属人数"
-            required
+           
           ></v-text-field>
 
           <!-- twitter -->
@@ -108,11 +117,11 @@
             :disabled="!valid"
             color="success"
             class="mr-4"
-            @click="validate"
+            @click="$refs.form.validate()"
           >
             Validate
           </v-btn>
-          <v-btn color="error" class="mr-4" @click="submit"> 登録 </v-btn>
+          <v-btn color="error" class="mr-4" type="submit"> 登録 </v-btn>
         </v-form>
       </v-card-text>
     </v-card>
@@ -139,6 +148,7 @@ import {
   collection,
 } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
+// import fireVue from '../../../../Django_meigaku/rest_meigaku/project/frontend/src/views/fire.vue';
 // import vuesocial from "@growthbunker/vuesocial"
 
 export default {
@@ -146,7 +156,10 @@ export default {
   data: () => ({
     valid: true,
     is_registed: false,
-    rules: [],
+    rules: [
+      (v) => (v && v.length >= 1) || "入力してください",
+    ],
+    errors:[],
     //   formデータ
     username: "",
     id: 0,
@@ -161,7 +174,7 @@ export default {
     often: "",
     money: "円",
     place: "",
-    category: "",
+    category:"",
     campas: "",
     twitter: "https://twitter.com/",
     instagram: "",
@@ -241,8 +254,8 @@ export default {
       // FireStorage 画像取得
       const storage = getStorage(app);
       const file_path = this.user + "/" + this.profile_name;
-
       console.log("ファイルpath", file_path);
+
       // const imageRef = ref(storage, file_path);
       getDownloadURL(ref(storage, file_path))
         .then((url) => {
@@ -268,7 +281,7 @@ export default {
     }
   },
   methods: {
-    validate() {
+    validate(){
       this.$refs.form.validate();
     },
     reset() {
@@ -276,7 +289,11 @@ export default {
     },
     //登録
     async submit() {
-      console.log("提出");
+
+      console.log(this.campas)
+
+      if (this.$refs.form.validate()) {
+        // this.$refs.form.reset()
       const app = getApp();
       const db = getFirestore(app);
       // 新規登録の場合idはuserdata数
@@ -316,11 +333,12 @@ export default {
         console.log("Uploaded file:", this.profile_name);
       });
 
-
       //サークルページに遷移
       // console.log(`/circle/${this.campas}/${this.category}/${this.user}`)
       this.$router.push(`/circle/${this.campas}/${this.category}/${this.user}`)
-    },
+
+
+    }},
   },
 };
 </script>

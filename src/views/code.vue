@@ -1,6 +1,6 @@
 <template>
     <v-container >
-      <h2>Horizontal Card Scroll</h2>
+      <!-- <h2>Horizontal Card Scroll</h2>
       <div class="card-container">
         <v-row >
           <v-col v-for="(card, index) in cards" :key="index" cols="3">
@@ -17,9 +17,9 @@
             </v-hover>
           </v-col>
         </v-row>
-      </div>
+      </div> -->
 
-      <v-main>
+      <!-- <v-main>
         <v-row no-gutters>
           <v-col row="12" sm="6" md="4" v-for="(res,index) in cards" :key="index">
             <div :data-src = "index" v-intersect="onIntersect">
@@ -32,15 +32,15 @@
             </div>
           </v-col>
         </v-row>
-      </v-main>
+      </v-main> -->
 
-
+<!-- 
       <v-list class="scroll-x">
     <v-card v-for="card in cards" :key="card" class="mx-3">
       <v-card-title>{{ card.title }}</v-card-title>
       <v-card-text>{{ card.text }}</v-card-text>
     </v-card>
-  </v-list>
+  </v-list> -->
   <v-main>
     <div class="container">
   <h2>Scrolling Card UI With Flexbox</h2>

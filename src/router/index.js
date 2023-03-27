@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-// import home2 from "../views/Home2.vue"
+import home2 from "../views/code.vue"
 import Login from '../views/Login.vue'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 
@@ -13,11 +13,11 @@ const routes = [
     name: "Home",
     component: Home,
   },
-  // {
-  //   path: "/home",
-  //   name: "home2",
-  //   component: home2,
-  // },
+  {
+    path: "/home",
+    name: "home2",
+    component: home2,
+  },
   {
     path: '/login',
     name: 'Login',
