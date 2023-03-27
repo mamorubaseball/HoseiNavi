@@ -1,36 +1,6 @@
 <template>
   <div id="home">
-    <div class="pa-10">
-    <v-form
-      @submit.prevent="search"
-    >
-      <v-text-field
-        v-model="searchKeyword"
-        dense
-        hide-details
-        rounded
-        clearable
-        placeholder="サークルを検索"
-        :solo="isFocused"
-        :filled="!isFocused"
-        :style="{ minWidth: '180px' }"
-        @focus="focus"
-        @blur="blur"
-      />
-      <v-btn type="submit">検索</v-btn>
-    </v-form>
-      <ul class="cards">
-          <li v-for="(circle,index) in circles" :key="index" class="csscard box">
-        <div>
-          <img :src="circle.src"  height="120" width="150"/>
-        <h3 class="csscard-title">{{ circle["username"] }}</h3>
-        <div class="csscard-content">
-          <p>テキスト</p>
-        </div>
-      </div>
-    </li>
-    </ul>
-    </div>
+<search></search>
     <div class="pb-1">
 <h2>記事</h2>
     <blogs></blogs>
@@ -43,6 +13,8 @@
 <script>
 import blogs from "../components/Blogs.vue";
 import circles from "../components/Circles.vue";
+import search from "../components/Search.vue";
+
 import { mapState } from 'vuex'
 import { getApp } from "firebase/app";
 import { getStorage,ref, getBlob } from "firebase/storage";
@@ -70,7 +42,8 @@ export default {
 
   components: {
    blogs,
-   circles
+   circles,
+   search
   },
   mounted() {
     if (this.isLoggedIn) {
