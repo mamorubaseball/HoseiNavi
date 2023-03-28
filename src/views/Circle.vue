@@ -1,8 +1,9 @@
 <template>
   <div class="circle pa-10">
     <v-row jsutify="center">
+      <v-col md="1"></v-col>
       <!-- 中身 -->
-      <v-col md="9" id="main">
+      <v-col md="8" class="main-content">
       <h2 id="username">{{ username }}</h2>
  <img id="image" width="200" height="200" />
     <h2 id="content_act">活動内容</h2>
@@ -134,26 +135,6 @@ export default {
 };
 </script>
 <style scoped>
-
-#main{
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-.toc{
-  background-color: white;
-  border-radius: 13px;
-  padding: 1rem; 
-  margin-left: 1rem;
-  position: sticky;
-  top: 20rem; 
-  max-height: 90vh;
-  overflow: scroll;
-  font-size: 1.2rem;
-}
-
 /* スタイル */
 h2 {
     margin-top: 2.4em;
@@ -184,5 +165,32 @@ h2::after {
   font-size: 22px;
   padding: 12px 20px;
 }
+
+/* メインコンテンツ */
+.main-content{
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  width: 80;
+  /* margin-inline: 100px; */
+  padding-inline: 30px;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* text-align: center; */
+  color: #2c3e50;
+  background-color: white;
+}
+/* 横目次*/
+.toc{
+  background-color: white;
+  border-radius: 13px;
+  padding: 1rem; 
+  margin-left: 1rem;
+  position: sticky;
+  top: 20rem; 
+  max-height: 90vh;
+  overflow: scroll;
+  font-size: 1.2rem;
+}
+
 
 </style>

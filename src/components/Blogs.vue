@@ -3,11 +3,12 @@
     <ul class="cards">
           <li v-for="(post,index) in posts" :key="post.slug + '_' + index" class="csscard box">
         <div class = "">
+          <a :href="'blogs/'+post.slug">
           <img
       v-if="post.featured_image"
       :src="post.featured_image"
       alt=""
-      height="120" width="150"
+      height="100" width="150"
     >
     <img
       v-else
@@ -18,6 +19,7 @@
         <div class="csscard-content">
           <p>{{ post["summary"] }}</p>
         </div>
+      </a>
       </div>
       <!-- <div class="csscard-link-wrapper">
         <a href="" class="csscard-link">Learn More</a>
@@ -111,6 +113,12 @@ import butter from '../buttercms';
   --thumb: #edf2f4;
 }
 
+a{
+  color: inherit; /* 親要素の色を継承 */
+  text-decoration: none; /* 下線をなくす */
+  cursor: pointer; /* マウスカーソルをポインターに変更 */
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -133,7 +141,9 @@ body {
 h2 {
   /* margin-bottom: 1em; */
 }
-
+h3,p{
+  color: #2b2d42;
+}
 .cards {
   display: flex;
   padding: 20px 0px;

@@ -9,18 +9,22 @@
         <ul class="cards">
           <li v-for="(circle,index) in campases" :key="index" class="csscard box">
         <div>
-          <img :src="circle.src"  height="120" width="150"/>
-        <h3 class="csscard-title">{{ circle["username"] }}</h3>
-        <div class="csscard-content">
+          <a :href="circle.to">
+            <img :src="circle.src"  height="120" width="150"/>
+        <h3 class="csscard-title" style="color:black">{{ circle["username"] }}</h3>
+        <div class="csscard-content" style="color:black">
           <p>テキスト</p>
         </div>
+          
+          </a>
       </div>
+    </li>
+  </ul>
+</div>
       <!-- <div class="csscard-link-wrapper">
         <a href="" class="csscard-link">Learn More</a>
       </div> -->
-    </li>
 
-        </ul>
 
         <!-- <v-row>
           <v-col
@@ -43,20 +47,21 @@
             </v-card>
           </v-col>
         </v-row> -->
-      </div>
 
       <div v-if="name == '小金井'" class="ma-10">
         <div class="">
           <h2>{{ name }}キャンパス</h2>
         </div>
         <ul class="cards">
-          <li v-for="(circle,index) in campases" :key="index" class="csscard box">
-        <div>
-          <img :src="circle.src" height="120" width="150" class=""/>
-        <h3 class="csscard-title">{{ circle["username"] }}</h3>
-        <div class="csscard-content">
-          <p>テキスト</p>
+          <li v-for="(circle,index) in campases" :key="index" class="csscard box" ref="">
+        <div style="color: black;">
+          <a :href="circle.to">
+          <img :src="circle.src">
+        <h3 class="csscard-title" style="color:black">{{ circle["username"] }}</h3>
+        <div class="csscard-content" style="color:black">
+          <p >テキスト</p>
         </div>
+      </a>
       </div>
       <!-- <div class="csscard-link-wrapper">
         <a href="" class="csscard-link">Learn More</a>
@@ -239,6 +244,12 @@ export default {
   text-align: center;
   color: #2c3e50;
 } */
+
+a{
+  color: inherit; /* 親要素の色を継承 */
+  text-decoration: none; /* 下線をなくす */
+  cursor: pointer; /* マウスカーソルをポインターに変更 */
+}
 
 .box{
   border-radius: 100px;

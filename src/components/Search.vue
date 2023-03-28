@@ -1,7 +1,9 @@
 <template>
     <div class="pa-10">
+  
     <v-form
       @submit.prevent="search"
+      style="display: flex; justify-content: center;"
     >
       <v-text-field
         v-model="searchKeyword"
@@ -12,7 +14,7 @@
         placeholder="サークルを検索"
         :solo="isFocused"
         :filled="!isFocused"
-        :style="{ minWidth: '180px' }"
+        :style="{ minWidth: '150px',width:'100px'}"
         @focus="focus"
         @blur="blur"
       />
