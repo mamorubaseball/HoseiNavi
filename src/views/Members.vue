@@ -122,7 +122,7 @@ import { mdiTwitter, mdiGithub, mdiNoteEditOutline } from "@mdi/js";
 export default {
   name: "Members",
   data: () => ({
-    mamoru_img: require("@/assets/tanimoto.jpeg"),
+    mamoru_img: require("@/assets/mamoru.jpeg"),
     mdiTwitterSvgPath: mdiTwitter,
     mdiGithubSvgPath: mdiGithub,
     qiitaIcon: mdiNoteEditOutline,

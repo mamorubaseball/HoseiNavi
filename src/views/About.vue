@@ -3,7 +3,7 @@
     <div class="head">
       <div class="header-content">
         <h1>
-          法政を<span style="color: orange">世界一</span>の
+          法政を<span style="color: orange">最高</span>の
           <br />
           学び場にする
         </h1>
@@ -19,12 +19,12 @@
       <h2>Mission</h2>
       <div class="motto_mission_description">
         <h3>
-          東大生の挑戦・熱中・学びの
+          法政生の挑戦・熱中・学びの
           <br class="display-sp" />
           機会を最大化する
         </h3>
-        <p>
-          東大生活は、学びに満ちた選択肢（学生団体/サークル/ゼミ/インターン/その他etc.）に溢れています。そんな数ある選択肢を前に、学びを求める東大生が「理想とする場」を見つけ、飛び込み、何かに熱中する。UT-BASEは、そうした最高のひと時を誰もが享受できる状態を目指します。
+        <p class="pt-3">
+          大学生活は、学びに満ちた選択肢（学生団体/サークル/ゼミ/インターン/その他etc.）に溢れています。そんな数ある選択肢を前に、法政大生が「理想とする場」を見つけ、飛び込み、何かに熱中する。法政ナビは、そうした最高のひと時を誰もが享受できる状態を目指します。
         </p>
       </div>
     </div>
@@ -34,27 +34,20 @@
         <div class="motto_value">
           <div class="motto_value_element">
             <h3>01</h3>
-            <h4>団体内外での挑戦・熱中・学びを、まずメンバーが体現する</h4>
-            <p>UT-BASEメンバー1人1人が何かに夢中になる姿を応援しよう</p>
+            <h4>大学情報の可視化</h4>
+            <p>学びに満ちた選択肢（学生団体/サークル/ゼミ/インターン)を共有することで、学びの機会損失を減らしたい</p>
           </div>
           <div class="motto_value_element">
             <h3>02</h3>
-            <h4>お互いの想いを育む環境を作る</h4>
+            <h4>挑戦者の支援</h4>
             <p>
-              メンバーの課題意識や自由な発想を大切に育み、全員で熱意の輪を広げよう
+              法政生の中で挑戦している学生はたくさんいます。学生の挑戦を『支援』することを目的として、彼らへインタビューを行う
             </p>
           </div>
           <div class="motto_value_element">
             <h3>03</h3>
             <h4>学生目線を忘れない</h4>
-            <p>全て学生の手で運営される団体だからこその目線を常に意識しよう</p>
-          </div>
-          <div class="motto_value_element">
-            <h3>04</h3>
-            <h4>全方向に至誠を尽くす</h4>
-            <p>
-              UT-BASE内外を関わらず、全ての人々にとって信頼に足る団体であろう
-            </p>
+            <p>全て学生の手で運営される組織だからこその目線を常に意識しよう</p>
           </div>
         </div>
       </div>
@@ -65,23 +58,22 @@
         <div class="motto_about_caption">
           <h2>About us</h2>
           <div class="motto_about_description">
-            <h3>東大生の「成長拠点」になりたい</h3>
+            <h3>『法政大学で良かった』と思える大学生活を過ごしてほしい</h3>
             <p>
-              「東大に来たけどうまく居場所を見つけられない」
+              「法政に来たけどうまく居場所を見つけられない」
               <br />
               「何かに挑戦したいけど勇気がない」
               <br />
-              「どんな選択肢があるのかがわからない」
+              「法政で何ができるのかわからない」
               <br />
-              そんな声を前に、学内の情報格差を解消すべく2020年3月に立ち上がった学生向けメディア“UT-BASE”。
+              そんな声を前に、学内の情報格差を解消すべく2023年3月に法政大学生に向けた学生メディア”法政ナビ”を開発。
               <br />
-              以来、活動の領域を広げ、学生にとって必要不可欠な入学時の諸手続きから履修に関する情報、学生団体/サークル/ゼミ/プログラム情報、学部・学科情報の発信、多様なオリジナル記事の配信を行っています。
+              開発者は法政大学を2023年に卒業した学生で、法政ナビ意外にもさまざまなサービスを開発してきたエンジニアでもあります。
               <br />
-              さらに、自主ゼミ“UT-Basecamp”の立ち上げや各種イベントの開催を通じて、自ら挑戦・熱中・学びのための選択肢を作る活動も行っています。
+              法政ナビがその名の通り「法政生の成長拠点」となり、1人でも多くの人を
+              <br>「挑戦・熱中・学び」へと導くインフラになりたい
               <br />
-              UT-BASEがその名の通り「東大生の成長拠点」となり、1人でも多くの人を「挑戦・熱中・学び」へと導くインフラになりたい。
-              <br />
-              その一貫した思いを抱きつつ、UT-BASEはこれからも走り続けます。
+              その一貫した思いを抱きつつ、法政ナビをこれからどんどん広めて行きたいと思っています。
             </p>
           </div>
         </div>
@@ -94,25 +86,22 @@
           <h2>メンバー募集</h2>
           <div class="motto_member_description">
             <p>
-              東大での学びの機会を拡大していくべく、我々はともに活動するメンバーを募集しています。
-              詳しくは下のリンクから。
+              法政での学びの機会を拡大していくべく、ともに活動するメンバーを募集しています。
+              <br> 詳しくは下のリンクから。
             </p>
           </div>
           <div class="recruitment_button_wrapper">
-            <a rel="noopener" target="_blank" href="/members"
-              ><div class="recruitment_member_introduction">
-                <p>団体メンバー紹介</p>
-              </div> </a
-            ><a
-              rel="noopener"
-              target="_blank"
-              href="https://docs.google.com/forms/d/e/1FAIpQLSdq5J-e7K98OsiZME20gAos_k6KX5zqCq5R_PCQNxumpkf6IA/viewform"
-              ><div class="recruitment_application_form">
-                <p>応募フォーム</p>
-              </div>
-            </a>
+            <v-btn to="/members" class="mr-10" color="orange" elevation="5">メンバー紹介</v-btn>
+            <v-btn elevation="5" color="orange">
+              <a href="https://forms.gle/LaYds16A2V8Cu2XA7">
+応募フォーム
+              </a>
+            </v-btn>
           </div>
-          <div class="motto_member_description">
+        </div>
+      </div>
+    </section>
+          <!-- <div class="motto_member_description">
             <p>
               メンバーがUT-BASEで現在何を行っているのか、UT-BASEにどんな思いを持って活動しているのかを綴っています。
             </p>
@@ -126,10 +115,8 @@
                 <p>メンバーの思い</p>
               </div>
             </a>
-          </div>
-        </div>
-      </div>
-    </section>
+          </div> -->
+
     <!-- <h2 class="pt-5">法政ナビ開発者</h2>
     <div id="text" class="p-5">
       <p>
@@ -155,7 +142,7 @@
 
     <div class="member">
       <h2 class="pt-5">法政ナビ開発者</h2>
-      <v-card class="mx-auto round" width="60%" outlined :elevation="20">
+      <v-card class="mx-auto round" width="60%" outlined elevation="20">
         <v-list-item three-line>
           <v-list-item-content>
             <div class="member-name">
@@ -172,7 +159,7 @@
               <div class="icon pt-3">
                 <v-row>
                   <v-col cols="4">
-                    <a href="https://github.com/mamorubaseball">
+                    <a href="https://twitter.com/EngineerMacho">
                       <v-icon left color="#1DA1F2">{{
                         mdiTwitterSvgPath
                       }}</v-icon>
@@ -217,7 +204,7 @@ import { mdiTwitter, mdiGithub, mdiNoteEditOutline } from "@mdi/js";
 export default {
   name: "About",
   data: () => ({
-    mamoru_img: require("@/assets/tanimoto.jpeg"),
+    mamoru_img: require("@/assets/mamoru.jpeg"),
     mdiTwitterSvgPath: mdiTwitter,
     mdiGithubSvgPath: mdiGithub,
     qiitaIcon: mdiNoteEditOutline,
@@ -379,6 +366,9 @@ a {
 
 .motto_about {
   background-image: url(/Users/mamoru/WebApp/HoseiNavi/hosei/src/assets/campase/法政大学.jpeg);
+}
+.motto_about h3{
+  padding:10px 0px;
 }
 
 .motto_about,
