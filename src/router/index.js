@@ -50,6 +50,15 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
+
+  // メンバーページ
+  {
+    path: "/members",
+    name: "members",
+    component: () =>
+    import(/* webpackChunkName: "about" */ "../views/Members.vue"),
+
+  },
 //サークル
   {
     path: '/circles',

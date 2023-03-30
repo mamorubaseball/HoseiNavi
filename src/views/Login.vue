@@ -77,8 +77,7 @@ export default {
           console.log("ログイン",this.email)
           console.log(response)
 
-          // ログインに成功したらプロフィールページにリダイレクト
-          this.$router.push('/profile')
+
         })
         .catch(e => {
           switch(e.code) {

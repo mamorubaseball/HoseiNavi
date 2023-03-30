@@ -45,7 +45,7 @@
       app
       color="orange"
       justify="center"
-      class="lighten-2 py-4 text-center white--text"
+      class="py-4 text-center white--text"
     >
       <div class="text-center">
         {{ new Date().getFullYear() }} — <strong>法政Navi </strong>
