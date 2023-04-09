@@ -5,8 +5,8 @@
         <div class = "">
           <a :href="'blogs/'+post.slug">
           <img
-      v-if="post.featured_image"
-      :src="post.featured_image"
+      v-if="post.eyecatch"
+      :src="post.eyecatch.url"
       alt=""
       height="100" width="150"
     >
@@ -64,8 +64,8 @@
 </v-row> -->
   </div>
 </template>
- <script>
-import butter from '../buttercms';
+<script>
+// import butter from '../buttercms';
  export default {
   name: 'blogs',
   data() {
@@ -76,12 +76,19 @@ import butter from '../buttercms';
   },
   methods: {
     getPosts() {
-      butter.post.list({
-        page: 1,
-        page_size: 10,
-      }).then((res) => {
-        this.posts = res.data.data;
-      });
+      const { createClient } = require('microcms-js-sdk');
+      const client = createClient({ serviceDomain: 'hfzrg25gx0', apiKey: 'B0UKK0VyBQeZTfSaAoHrZyggBtBcR8mpyT8i' });
+// service-domain は XXXX.microcms.io の XXXX 部分
+client
+  .get({
+    endpoint: 'blogs',
+  })
+  .then((res) => {
+    this.posts = res.contents;
+    console.log(res.contents[0])
+  }
+  )
+  .catch((err) => console.log("cmsエラー",err));
     },
   },
   created() {
