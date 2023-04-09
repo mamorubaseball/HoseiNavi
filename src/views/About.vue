@@ -365,7 +365,7 @@ a {
 }
 
 .motto_about {
-  background-image: url(/Users/mamoru/WebApp/HoseiNavi/hosei/src/assets/campase/法政大学.jpeg);
+  background-image: url(../assets/campase/法政大学.jpeg);
 }
 .motto_about h3{
   padding:10px 0px;
