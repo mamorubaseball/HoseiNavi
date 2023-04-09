@@ -9,6 +9,9 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "@mdi/font": "^7.2.96",
+    "@mdi/js": "^7.2.96",
+    "@notionhq/client": "^2.2.3",
     "buttercms": "^1.2.9",
     "core-js": "^3.8.3",
     "express": "^4.18.1",

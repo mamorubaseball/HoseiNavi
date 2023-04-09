@@ -11,14 +11,12 @@
    align="center">
     <v-card 
          height="240"
-         width="240" 
       :to="'blogs/'+post.slug">
       <article class="media">
         <img
       v-if="post.featured_image"
       :src="post.featured_image"
       alt=""
-      width="100"
       height="100"
     >
     <img

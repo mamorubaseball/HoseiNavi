@@ -1,27 +1,35 @@
 <template>
-<div id="circles">
+  <v-container>
+    <div id="circles">
 <!-- ネスト -->
 <div v-for="(campases,name ) in circles" :key="name">
 
-<div v-if="name == '市ヶ谷'" class="">
+<div v-if="name == '市ヶ谷'" class="ma-10">
 <div class="pa-5">
-  <h2>{{ name }}</h2>
+  <h2>{{ name }}キャンパス</h2>
 </div>
 <v-row>
   <v-col
   v-for="(circle,category) in campases"
   :key="category"
    cols="12"
-   sm="4"
-   align="center">
-    <v-card 
-         height="240"
-         width="240" 
-      :to="'circle/'+name+'/'+category">
-      <!-- <img src="@/assets/circle_category/baseball.jpeg" height="100" class="pa-2" > -->
-      <img :src = "circle.img" height="100" width="120" class="pa-2" >
-      <p class="pa-5">{{ category }}</p>
+   sm="6"
+        md="4"
+        lg="3"
+        >
+        <v-hover v-slot="{ hover }">
+    <v-card
+    class="box on-hover"
+    
+      :to="'circle/'+name+'/'+category"
+      :elevation="hover ? 12 : 2"
+>
+      <!-- <v-img :src='circle.img' height="100" width="120" class="pa-2"></v-img> -->
+      <v-img :src='circle.img' height="100"></v-img>
+      <v-card-subtitle>{{ category }}</v-card-subtitle>
+      <v-card-text>{{ circle["message"] }}</v-card-text>
     </v-card>
+  </v-hover>
   </v-col>
 </v-row>
 
@@ -29,51 +37,63 @@
 
 <div v-if="name == '小金井'" class="ma-10">
 <div class="pa-5">
-  <h2>{{ name }}</h2>
+  <h2>{{ name }}キャンパス</h2>
 </div>
 <v-row>
   <v-col
   v-for="(circle,category) in campases"
   :key="category"
    cols="12"
-   sm="4"
-   align="center">
-    <v-card 
-         height="240"
-         width="240" 
-      :to="'circle/'+name+'/'+category">
-      <img :src=circle.img height="100" width="120" class="pa-2">
-      <p class="pa-5">{{ category }}</p>
+   sm="6"
+        md="4"
+        lg="3"
+   >
+   <v-hover v-slot="{ hover }">
+    <v-card
+    class="box on-hover"
+    
+      :to="'circle/'+name+'/'+category"
+      :elevation="hover ? 12 : 2"
+>
+      <!-- <v-img :src='circle.img' height="100" width="120" class="pa-2"></v-img> -->
+      <v-img :src='circle.img' height="100"></v-img>
+      <v-card-subtitle>{{ category }}</v-card-subtitle>
+      <v-card-text>{{ circle["message"] }}</v-card-text>
     </v-card>
+  </v-hover>
+  
   </v-col>
 </v-row>
 </div>
 
-<div v-if="name == '多摩'" class="ma-10">
+<!-- <div v-if="name == '多摩'" class="ma-10">
 <div class="pa-5">
-  <h2>{{ name }}</h2>
+  <h2>{{ name }}キャンパス</h2>
 </div>
 <v-row>
   <v-col
   v-for="(circle,category) in campases"
   :key="category"
    cols="12"
-   sm="4"
+   sm="6"
+        md="4"
+        lg="3"
    align="center">
     <v-card
-          height="240"
-         width="240" 
+
       :to="'circle/'+name+'/'+category">
-      <img :src='circle.img' height="100" width="120" class="pa-2">
-      <p>{{ category }}</p>
-      <!-- <p>{{ circle['message'] }}</p> -->
+      <v-img :src='circle.img' height="100" width="120" class="pa-2"></v-img>
+      <v-img :src='circle.img' height="100"></v-img>
+      <v-card-subtitle>{{ category }}</v-card-subtitle>
+      <v-card-text>{{ circle["message"] }}</v-card-text>
+      <p>{{ circle['message'] }}</p>
     </v-card>
   </v-col>
 </v-row>
+</div> -->
 </div>
 </div>
-</div>
-
+  </v-container>
 </template>
 <script>
 export default {
@@ -81,27 +101,27 @@ export default {
   data: () => ({
     circles: { 
    '市ヶ谷':{
-        "第二体育会":{'message':'第二体育会です','img':require("@/assets/circle_category/daini_itigaya.jpeg")},
-        "スポーツ(球技)":{'message':'第二体育会です','img':require("@/assets/circle_category/basuke_itigaya.jpeg")},
-    "スポーツ(球技以外)":{'message':'第二体育会です','img':require("@/assets/circle_category/suiei.jpeg")},
-    "音楽":{'message':'第二体育会です','img':require("@/assets/circle_category/music_itigaya.jpeg")}, 
-    "文化系":{'message':'第二体育会です','img':require("@/assets/circle_category/bunka_itigaya.jpeg")},
-    "国際(言語)":{'message':'第二体育会です','img':require("@/assets/circle_category/eigo_itigaya.jpeg")},
-    "趣味":{'message':'第二体育会です','img':require("@/assets/circle_category/shumi_itigaya.jpeg")},
-    "ボランティア":{'message':'第二体育会です','img':require("@/assets/circle_category/borantia_itigaya.jpeg")},
-     "応援団":{'message':'第二体育会です','img':require("@/assets/circle_category/ouen_itigaya.webp")}
+        "第二体育会":{'message':'ボクシング・空手など','img':require("@/assets/circle_category/daini_itigaya.jpeg")},
+        "スポーツ(球技)":{'message':'野球・サッカー・バスケなど','img':require("@/assets/circle_category/basuke_itigaya.jpeg")},
+    "スポーツ(球技以外)":{'message':'水泳・バトミントン・陸上など','img':require("@/assets/circle_category/suiei.jpeg")},
+    "音楽":{'message':'軽音・バンドサークル','img':require("@/assets/circle_category/music_itigaya.jpeg")}, 
+    "文化系":{'message':'文学研究会など','img':require("@/assets/circle_category/bunka_itigaya.jpeg")},
+    "国際(言語)":{'message':'ESS、海外プログラム事業部など','img':require("@/assets/circle_category/eigo_itigaya.jpeg")},
+    "趣味":{'message':'広告研究会','img':require("@/assets/circle_category/shumi_itigaya.jpeg")},
+    "ボランティア":{'message':'ボランティア・被災地支援など','img':require("@/assets/circle_category/borantia_itigaya.jpeg")},
+     "応援団":{'message':'リーダー部、吹奏楽部、チアリーディング部など','img':require("@/assets/circle_category/ouen_itigaya.webp")}
       },
 
    '小金井':{
-        "工体連":{'message':'第二体育会です','img':require("@/assets/circle_category/amefuto_koganei.jpeg")},
-        "スポーツ(球技)":{'message':'第二体育会です','img':require("@/assets/circle_category/sports_koganei.jpeg")},
-    "スポーツ(球技以外)":{'message':'第二体育会です','img':require("@/assets/circle_category/kendou_koganei.jpeg")},
-    "音楽":{'message':'第二体育会です','img':require("@/assets/circle_category/music_koganei.jpeg")}, 
-    "文化系":{'message':'第二体育会です','img':require("@/assets/circle_category/bunka_koganei.jpeg")},
-    "国際(言語)":{'message':'第二体育会です','img':require("@/assets/circle_category/ESS_koganei.jpeg")},
-    "趣味":{'message':'第二体育会です','img':require("@/assets/circle_category/shumi_koganei.jpeg")},
-    "ボランティア":{'message':'第二体育会です','img':require("@/assets/circle_category/borantia_koganei.jpeg")},
-        "応援団":{'message':'第二体育会です','img':require("@/assets/circle_category/ouen_koganei.webp")}
+        "工体連":{'message':'ボクシング・少林寺など','img':require("@/assets/circle_category/amefuto_koganei.jpeg")},
+        "スポーツ(球技)":{'message':'野球・サッカー・バスケなど','img':require("@/assets/circle_category/sports_koganei.jpeg")},
+    "スポーツ(球技以外)":{'message':'水泳・バトミントン・陸上など','img':require("@/assets/circle_category/kendou_koganei.jpeg")},
+    "音楽":{'message':'法政大学交響楽団・エレクトーン','img':require("@/assets/circle_category/music_koganei.jpeg")}, 
+    "文化系":{'message':'将棋部・写真技術研究会など','img':require("@/assets/circle_category/bunka_koganei.jpeg")},
+    "国際(言語)":{'message':'ESS、海外プログラム事業部など','img':require("@/assets/circle_category/ESS_koganei.jpeg")},
+    "趣味":{'message':'鉄道研究会、マンガ研究会など','img':require("@/assets/circle_category/shumi_koganei.jpeg")},
+    "ボランティア":{'message':'農業サークルあぐり（環境）','img':require("@/assets/circle_category/borantia_koganei.jpeg")},
+        "応援団":{'message':'リーダー部、吹奏楽部、チアリーディング部など','img':require("@/assets/circle_category/ouen_koganei.webp")}
       },
     '多摩':{
         "体育会":{'message':'第二体育会です','img':require("@/assets/circle_category/soccer_tama.jpeg")},
@@ -134,6 +154,17 @@ export default {
     grid-template-columns: repeat(auto-fill, 270px);
     padding: 0 0 100px;
     margin: 0 auto;
+}
+.boxcard{
+  border-radius: 10px;
+    /* 初期状態のスタイル */
+  box-shadow: 0 0 0 rgba(0, 0, 0, 10);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.boxcard:hover {
+  /* マウスを乗せた時のスタイル */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 #circles{
     font-family: "Avenir", Helvetica, Arial, sans-serif;

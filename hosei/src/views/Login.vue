@@ -43,7 +43,7 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer />
-                <v-btn v-on:click="signIn" color="orange" :to="'/profile'">ログイン</v-btn>
+                <v-btn v-on:click="signIn" color="orange">ログイン</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -73,9 +73,11 @@ export default {
       const auth = getAuth()
       signInWithEmailAndPassword(auth, this.email, this.password)
         .then(response => {
-          this.$store.commit('UpdateUser',this.email)
+          this.$store.commit('login',this.email)
           console.log("ログイン",this.email)
           console.log(response)
+
+
         })
         .catch(e => {
           switch(e.code) {

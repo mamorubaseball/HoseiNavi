@@ -1,137 +1,100 @@
 <template>
-  <div id="category">
-    <h1>{{ $route.params.campase }}キャンパス:{{ $route.params.category }}</h1>
-        <ul class="cards">
+    <div class="pa-10">
+  
+    <v-form
+      @submit.prevent="search"
+      style="display: flex; justify-content: center;"
+    >
+      <v-text-field
+        v-model="searchKeyword"
+        dense
+        hide-details
+        rounded
+        clearable
+        placeholder="サークルを検索"
+        :solo="isFocused"
+        :filled="!isFocused"
+        :style="{ minWidth: '150px',width:'100px'}"
+        @focus="focus"
+        @blur="blur"
+      />
+      <v-btn type="submit">検索</v-btn>
+    </v-form>
+      <ul class="cards">
           <li v-for="(circle,index) in circles" :key="index" class="csscard box">
         <div>
-          <a :href="circle.to">{{ circle.to }}
-            <img :src="circle.src"  height="120" width="150"/>
-        <h3 class="csscard-title" style="color:black">{{ circle["username"] }}</h3>
-        <div class="csscard-content" style="color:black">
+          <img :src="circle.src"  height="120" width="150"/>
+        <h3 class="csscard-title">{{ circle["username"] }}</h3>
+        <div class="csscard-content">
           <p>テキスト</p>
         </div>
-          
-          </a>
       </div>
     </li>
-  </ul>
-    <!-- <div class="pa-5">
-<v-row>
-  <v-col
-   v-for="(circle, index) in circles"
-    :key="index"
-   cols="12"
-   sm="4"
-   align="center">
-    <v-card 
-         height="240"
-         width="240" 
-      :to="circle.to">
-    <img :src = circle.src height="120" width="150" style="padding:10px"/>
-    
-    <p>{{ circle.username }}</p>
-    <p>{{ circle.content }}</p>
-    </v-card>
-  </v-col>
-</v-row>
-    </div> -->
+    </ul>
     </div>
 </template>
+
 <script>
 import { getApp } from "firebase/app";
-import { getStorage,getDownloadURL, ref } from "firebase/storage";
+import { getStorage,ref, getBlob } from "firebase/storage";
 import {
   getFirestore,
+  collection,
   query,
   where,
-  collection,
   getDocs,
 } from "firebase/firestore";
 
 export default {
-  name: "Category",
-  data: () => ({
-    campse:"",
-    category:"",
+  name: 'search',
+  data:()=>({
+    searchKeyword:'',
+    searchResult: [],
     circles:[],
-    }),
+  }),
+  mounted() {
+  },
+  methods: {
+    search(){
+      // 検索結果をリセット
+      this.circles = [];
+    console.log("検索開始")
+    // initialize
+    const app = getApp();
+    // get user list
+    let db = getFirestore(app);
+    const storage = getStorage(app);
+    const Users = collection(db,"users");
 
-    methods: {
-      async getCircle(campas,category) {
-      const promises = []; // Promiseを格納するための配列
-      // initialize
-      const app = getApp();
-      const storage = getStorage(app);
-      // get user list
-      let db = getFirestore(app);
-      const Users = collection(db, "users");
-      await getDocs(query(Users, where("campas", "==", campas),where("category","==",category ))).then((snapshot) => {
-        snapshot.forEach((doc) => {
-          const circle_data = doc.data();
-          const url =
-            "/circle/" +
-            circle_data.campas +
-            "/" +
-            circle_data.category +
-            "/" +
-            doc.id;
-          circle_data["email"] = doc.id;
-          circle_data["to"] = url;
-          // 画像srcの取得
-          const file_path = doc.id + "/" + circle_data.profile_name;
-          const imageRef = ref(storage, file_path);
-
-      // Promiseを追加
-      promises.push(
-        getDownloadURL(imageRef).then((url) => {
-          circle_data["src"] = url;
-        }).catch((error) => {
-          console.log("エラー", error);
+    getDocs(query(Users,where("username",">=",this.searchKeyword),where("username","<=",this.searchKeyword +'\uf8ff')))
+      .then(snapshot =>{
+      snapshot.forEach(doc=>{
+        console.log("検索結果",doc.id)
+        const circle_data = doc.data()
+        const url =  circle_data.category+'/'+doc.id;
+        circle_data['email'] = doc.id
+        circle_data['to'] = url;
+        // 画像srcの取得
+        const file_path = doc.id + "/" +circle_data.profile_name
+        const imageRef = ref(storage, file_path);
+        getBlob(imageRef)
+        .then((blob) => {
+            const blobURL = URL.createObjectURL(blob);
+            circle_data['src'] = blobURL
         })
-      );
-          //配列に格納する
-          this.circles.push(circle_data);          
-        });
-      });
-  // すべてのダウンロードURLの取得が完了したら、Vue.jsのリアクティブシステムをトリガーする
-  Promise.all(promises).then(() => {
-    // Vue.jsのリアクティブシステムをトリガーする
-    this.$forceUpdate();
-  });
-    }},
-    mounted() {
-      //URLパラメータ
-      this.campase = this.$route.params.campase;
-      this.category = this.$route.params.category;
-      this.getCircle(this.campase,this.category);
-      console.log(this.circles)
+        .catch((e) => {
+            console.log(e)})
+        //配列に格納する
+        this.circles.push(circle_data)
+
+      })
+    })
     }
-};
+  },
+}
 </script>
+
 <style scoped>
-#category {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#columes{
-     font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-
-a{
-  color: inherit; /* 親要素の色を継承 */
-  text-decoration: none; /* 下線をなくす */
-  cursor: pointer; /* マウスカーソルをポインターに変更 */
-}
-
 .box{
   border-radius: 100px;
     /* 初期状態のスタイル */
@@ -313,5 +276,7 @@ h2 {
   display: flex;
   margin-left: 4px;
 }
+
+
 
 </style>

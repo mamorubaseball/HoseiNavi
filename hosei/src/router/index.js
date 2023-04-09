@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import home2 from "../views/code.vue"
 import Login from '../views/Login.vue'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 
@@ -11,6 +12,11 @@ const routes = [
     path: "/",
     name: "Home",
     component: Home,
+  },
+  {
+    path: "/home",
+    name: "home2",
+    component: home2,
   },
   {
     path: '/login',
@@ -34,7 +40,7 @@ const routes = [
       })
     }
   },
-  //サークル
+// アバウトページ
   {
     path: "/about",
     name: "about",
@@ -44,6 +50,16 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
+
+  // メンバーページ
+  {
+    path: "/members",
+    name: "members",
+    component: () =>
+    import(/* webpackChunkName: "about" */ "../views/Members.vue"),
+
+  },
+//サークル
   {
     path: '/circles',
     name: 'Circles',
@@ -80,7 +96,7 @@ const routes = [
       })
     }
   },
-   // buttercmsでブログ記事作成
+   // buttercmsでブログ記事作成⇦お金かかる
    {
     path: '/blogs',
     name: 'Blogs',
@@ -91,6 +107,13 @@ const routes = [
     name: 'Blog',
     component: () => import(/* webpackChunkName: "blog" */ '../views/Blog.vue')
   },
+
+  // notion 
+  {
+    path: '/notion',
+    name: 'Notion',
+    component: () => import(/* webpackChunkName: "blogs" */ '../views/Notion.vue')
+  }
 
 ];
 

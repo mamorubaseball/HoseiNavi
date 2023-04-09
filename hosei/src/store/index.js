@@ -5,18 +5,17 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    user:null
-  },
-  getters:{
-    user: state => state.user
+    isLoggedIn: false,
+    user: null
   },
   mutations: {
-    UpdateUser(state,user){
+    login(state, user) {
+      state.isLoggedIn = true
       state.user = user
+    },
+    logout(state) {
+      state.isLoggedIn = false
+      state.user = null
     }
   },
-  actions: {
-  },
-  modules: {
-  }
 })
