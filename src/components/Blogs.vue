@@ -3,7 +3,7 @@
     <ul class="cards">
           <li v-for="(post,index) in posts" :key="post.slug + '_' + index" class="csscard box">
         <div class = "">
-          <a :href="'blogs/'+post.slug">
+          <a :href="'blogs/'+post.id">
           <img
       v-if="post.eyecatch"
       :src="post.eyecatch.url"
