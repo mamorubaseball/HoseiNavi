@@ -8,17 +8,18 @@
       v-if="post.eyecatch"
       :src="post.eyecatch.url"
       alt=""
-      height="100" width="150"
+      height="120" 
     >
     <img
       v-else
       src="http://via.placeholder.com/250x250"
       alt=""
+      height="120" 
     >          
-        <h3 class="csscard-title">{{ post["title"] }}</h3>
-        <div class="csscard-content">
+        <h3 class="csscard-title pt-5">{{ post["title"] }}</h3>
+        <!-- <div class="csscard-content">
           <p>{{ post["summary"] }}</p>
-        </div>
+        </div> -->
       </a>
       </div>
       <!-- <div class="csscard-link-wrapper">

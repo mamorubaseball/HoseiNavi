@@ -182,15 +182,14 @@ h2::after {
 /* 横目次*/
 .toc{
   background-color: white;
-  border-radius: 13px;
+  /* border-radius: 10px; */
   padding: 1rem; 
-  margin-left: 1rem;
+  /* margin-left: 1rem; */
   position: sticky;
   top: 20rem; 
   max-height: 90vh;
-  overflow: scroll;
+  /* overflow: scroll; */
   font-size: 1.2rem;
 }
-
 
 </style>
