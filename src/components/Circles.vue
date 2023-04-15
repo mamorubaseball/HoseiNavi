@@ -7,26 +7,30 @@
           <h2>{{ name }}キャンパス</h2>
         </div>
         <ul class="cards">
-          <li v-for="(circle,index) in campases" :key="index" class="csscard box">
-        <div>
-          <a :href="circle.to">
-            <img :src="circle.src"  height="120" width="150"/>
-        <h3 class="csscard-title" style="color:black">{{ circle["username"] }}</h3>
-        <div class="csscard-content" style="color:black">
-          <p>テキスト</p>
-        </div>
-          
-          </a>
+          <li
+            v-for="(circle, index) in campases"
+            :key="index"
+            class="csscard box"
+          >
+            <div>
+              <a :href="circle.to">
+                <img :src="circle.src" height="120" width="150" />
+                <h3 class="csscard-title" style="color: black">
+                  {{ circle["username"] }}
+                </h3>
+                <div class="csscard-content" style="color: black">
+                  <p>テキスト</p>
+                </div>
+              </a>
+            </div>
+          </li>
+        </ul>
       </div>
-    </li>
-  </ul>
-</div>
       <!-- <div class="csscard-link-wrapper">
         <a href="" class="csscard-link">Learn More</a>
       </div> -->
 
-
-        <!-- <v-row>
+      <!-- <v-row>
           <v-col
             v-for="(circle, category) in campases"
             :key="category"
@@ -53,30 +57,27 @@
           <h2>{{ name }}キャンパス</h2>
         </div>
         <ul class="cards">
-          <li v-for="(circle,index) in campases" :key="index" class="csscard box" ref="">
-        <div style="color: black;">
-          <a :href="circle.to">
-          <img :src="circle.src">
-        <h3 class="csscard-title" style="color:black">{{ circle["username"] }}</h3>
-        <div class="csscard-content" style="color:black">
-          <p >テキスト</p>
-        </div>
-      </a>
-      </div>
-      <!-- <div class="csscard-link-wrapper">
-        <a href="" class="csscard-link">Learn More</a>
-      </div> -->
-    </li>
-
+          <li
+            v-for="(circle, index) in campases"
+            :key="index"
+            class="csscard box"
+            ref=""
+          >
+            <div style="color: black">
+              <a :href="circle.to">
+                <img :src="circle.src" />
+                <h3 class="csscard-title" style="color: black">
+                  {{ circle["username"] }}
+                </h3>
+                <div class="csscard-content" style="color: black">
+                  <p>テキスト</p>
+                </div>
+              </a>
+            </div>
+          </li>
         </ul>
-        <footer class="page-footer">
-  <span>made by </span>
-  <a href="https://georgemartsoukos.com/" target="_blank">
-    <img width="24" height="24" src="https://assets.codepen.io/162656/george-martsoukos-small-logo.svg" alt="George Martsoukos logo">
-  </a>
-</footer>
-
-        <!-- <v-row>
+      </div>
+      <!-- <v-row>
           <v-col
             v-for="(circle, category) in campases"
             :key="category"
@@ -94,7 +95,6 @@
             </v-card>
           </v-col>
         </v-row> -->
-      </div>
 
       <!-- <div v-if="name == '多摩'" class="ma-10">
         <div class="pa-5">
@@ -174,63 +174,65 @@ export default {
       // get user list
       let db = getFirestore(app);
       const Users = collection(db, "users");
-      await getDocs(query(Users, where("campas", "==", campas))).then((snapshot) => {
-        snapshot.forEach((doc) => {
-          const circle_data = doc.data();
-          const url =
-            "circle/" +
-            circle_data.campas +
-            "/" +
-            circle_data.category +
-            "/" +
-            doc.id;
-          circle_data["email"] = doc.id;
-          circle_data["to"] = url;
-          // 画像srcの取得
-          const file_path = doc.id + "/" + circle_data.profile_name;
-          const imageRef = ref(storage, file_path);
+      await getDocs(query(Users, where("campas", "==", campas))).then(
+        (snapshot) => {
+          snapshot.forEach((doc) => {
+            const circle_data = doc.data();
+            const url =
+              "circle/" +
+              circle_data.campas +
+              "/" +
+              circle_data.category +
+              "/" +
+              doc.id;
+            circle_data["email"] = doc.id;
+            circle_data["to"] = url;
+            // 画像srcの取得
+            const file_path = doc.id + "/" + circle_data.profile_name;
+            const imageRef = ref(storage, file_path);
 
-          // //chatGPTに言われたやり方(getDownloadURLを使う方法)
-          // ファイルのダウンロードURLを取得
-          // getDownloadURL(imageRef)
-          //   .then((url) => {
-          //     // console.log(url)
-          //     // 取得したURLを使って画像を表示するなどの処理を行う
-          //     circle_data["src"] = url;
-          //   })
-          //   .catch((error) => {
-          //     // エラーが発生した場合の処理
-          //     console.log("エラー",error);
-          //   });
-            
-          // getBlob(imageRef)
-          //   .then((blob) => {
-          //     const blobURL = URL.createObjectURL(blob);
-          //     circle_data["src"] = blobURL;
-          //   })
-          //   .catch((e) => {
-          //     console.log(e);
-          //   });
+            // //chatGPTに言われたやり方(getDownloadURLを使う方法)
+            // ファイルのダウンロードURLを取得
+            // getDownloadURL(imageRef)
+            //   .then((url) => {
+            //     // console.log(url)
+            //     // 取得したURLを使って画像を表示するなどの処理を行う
+            //     circle_data["src"] = url;
+            //   })
+            //   .catch((error) => {
+            //     // エラーが発生した場合の処理
+            //     console.log("エラー",error);
+            //   });
 
+            // getBlob(imageRef)
+            //   .then((blob) => {
+            //     const blobURL = URL.createObjectURL(blob);
+            //     circle_data["src"] = blobURL;
+            //   })
+            //   .catch((e) => {
+            //     console.log(e);
+            //   });
 
-      // Promiseを追加
-      promises.push(
-        getDownloadURL(imageRef).then((url) => {
-          circle_data["src"] = url;
-        }).catch((error) => {
-          console.log("エラー", error);
-        })
+            // Promiseを追加
+            promises.push(
+              getDownloadURL(imageRef)
+                .then((url) => {
+                  circle_data["src"] = url;
+                })
+                .catch((error) => {
+                  console.log("エラー", error);
+                })
+            );
+            //配列に格納する
+            this.circles[campas].push(circle_data);
+          });
+        }
       );
-          //配列に格納する
-          this.circles[campas].push(circle_data);          
-        });
+      // すべてのダウンロードURLの取得が完了したら、Vue.jsのリアクティブシステムをトリガーする
+      Promise.all(promises).then(() => {
+        // Vue.jsのリアクティブシステムをトリガーする
+        this.$forceUpdate();
       });
-  // すべてのダウンロードURLの取得が完了したら、Vue.jsのリアクティブシステムをトリガーする
-  Promise.all(promises).then(() => {
-    // Vue.jsのリアクティブシステムをトリガーする
-    this.$forceUpdate();
-  });
-
     },
   },
 };
@@ -245,16 +247,16 @@ export default {
   color: #2c3e50;
 } */
 
-a{
+a {
   color: inherit; /* 親要素の色を継承 */
   text-decoration: none; /* 下線をなくす */
   cursor: pointer; /* マウスカーソルをポインターに変更 */
 }
 
-.box{
+.box {
   border-radius: 100px;
-    /* 初期状態のスタイル */
-    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  /* 初期状態のスタイル */
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
   transition: box-shadow 0.3s ease-in-out;
 }
 
@@ -262,7 +264,6 @@ a{
   /* マウスを乗せた時のスタイル */
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
-
 
 /* スクロールに使ったCSS */
 :root {
@@ -300,11 +301,11 @@ h2 {
 .cards {
   display: flex;
   padding: 20px 0px;
-  
+
   list-style: none;
   overflow-x: scroll;
   /* 追加 */
-  overflow-y: hidden; 
+  overflow-y: hidden;
 
   scroll-snap-type: x mandatory;
 }
@@ -330,7 +331,6 @@ h2 {
   height: 50%;
   object-fit: cover;
 }
-
 
 .csscard:not(:last-child) {
   margin-right: 10px;
@@ -415,10 +415,9 @@ h2 {
   }
 }
 
-
 /* FOOTER STYLES
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-.page-footer {
+/* .page-footer {
   position: fixed;
   right: 0;
   bottom: 50px;
@@ -431,9 +430,5 @@ h2 {
 .page-footer a {
   display: flex;
   margin-left: 4px;
-}
-
-
-
-
+} */
 </style>
