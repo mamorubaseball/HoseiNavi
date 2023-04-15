@@ -2,39 +2,34 @@
   <!-- ナビゲーション -->
   <v-app>
     <!-- <v-navigation-drawer app>Navigation Lists</v-navigation-drawer> -->
-    <v-app-bar color="orange" dark app clipped-left height="40px">
+    <v-app-bar color="orange" dark app clipped-left height="60px">
+      <v-toolbar-title >法政ナビ</v-toolbar-title>
+
       <!-- ハンバーガーメニューの作成 -->
-      <v-app-bar-title>
-        <v-btn to="/">
-          <v-icon>mdi-home</v-icon>
-          <v-text>法政ナビ</v-text>
-        </v-btn>
-      </v-app-bar-title>
 
-      <v-spacer> </v-spacer>
-
-      <v-btn
-        v-if="isLoggedIn"
-        light
-        class="ma-2"
-        elevation="0"
-        v-on:click="signOut"
-        >ログアウト</v-btn
-      >
-      <v-btn v-else light class="ma-2" elevation="0" :to="'/login'"
-        >ログイン</v-btn
-      >
-      <v-btn light class="ma-2" elevation="0" :to="'/profile'"
-        >プロフィール</v-btn
-      >
-
-      <template v-slot:extension>
-        <v-tabs centered class="ml-n9" color="grey darken-1">
+        <v-tabs centered class="" style="width: 600px;" color="grey darken-1">
           <v-tab v-for="link in links" :key="link.name" :to="link.to">
             {{ link.name }}
           </v-tab>
         </v-tabs>
-      </template>
+
+
+<v-btn
+  v-if="isLoggedIn"
+ 
+  text
+  class="ma-2"
+  elevation="5"
+  v-on:click="signOut"
+  >ログアウト</v-btn
+>
+<v-btn v-else text  class="ma-2" elevation="2" :to="'/login'"
+  >ログイン</v-btn
+>
+<v-btn text  class="ma-2" elevation="2" :to="'/profile'"
+  >プロフィール</v-btn
+>
+
     </v-app-bar>
     <!-- main -->
     <v-main class="grey lighten-3">
